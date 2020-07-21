@@ -54,7 +54,7 @@ scrolvert = Scrollbar(f, command=tree.yview, orient='vertical')
 scrolvert.grid(row=10, column=4, sticky=N+S)
 tree.configure(yscrollcommand=scrolvert.set)
 
-# Scroll Horizontal (NO FUNCIONA BIEN)
+# Scroll Horizontal (NO FUNCIONA)
 scrolhoriz = Scrollbar(f, command=tree.xview, orient='horizontal')
 scrolhoriz.grid(row=11, column=0, columnspan=4, padx=1, pady=1, sticky=W+E)
 tree.configure(xscrollcommand=scrolhoriz.set)
