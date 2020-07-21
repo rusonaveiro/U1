@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from alta import *
+from Ejercicio1.alta import *
 
 root = Tk()
 root.title("Tarea Poo")
