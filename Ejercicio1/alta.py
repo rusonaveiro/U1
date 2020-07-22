@@ -24,15 +24,22 @@ def val_reg(tit, des, Ent1, Ent2, tree):
             cursor.execute("CREATE TABLE producto(id integer PRIMARY KEY NOT NULL, titulo VARCHAR NOT NULL, descripcion VARCHAR NOT NULL)")
         except:
             pass
+
         sql = "INSERT INTO producto (titulo, descripcion) VALUES (?, ?)"
         # sql = "INSERT INTO producto (titulo, descripcion) VALUES (%s, %s)"
         datos = (tit.get(), des.get())
         cursor.execute(sql, datos)
         base.commit()
+
         sql_id = "SELECT * FROM producto"
         cursor.execute(sql_id)
         ingresos = cursor.fetchall()
         print(ingresos)
+
+        records = tree.get_children()
+        for element in records:
+            tree.delete(element)
+
         global id
         for i in ingresos:
             print(i)
