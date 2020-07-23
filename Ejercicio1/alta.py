@@ -50,9 +50,11 @@ def val_reg(tit, des, Ent1, Ent2, tree):
 
 
 
+
 def borrar_reg(tree):
     global id
-    id = tree.focus()
+    id = tree.selection()[0]  # get selected item
+    tree.item(id)["text"]
     tree.delete(id)
 
     base = sqlite3.connect('baseprueba3.db')
@@ -65,3 +67,19 @@ def borrar_reg(tree):
     base.commit()
     base.close()
     print(cursor.rowcount, "registro ", id, " borrado")
+
+
+
+def editar_reg(tree):
+    global id
+    x = tree.get_children()
+    for item in x:  # Cambiando los children del root item
+        tree.item(item, text=str(id[0]), values=(id[1], id[2]))
+
+    base = sqlite3.connect('baseprueba3.db')
+    # base = mysql.connector.connect(host="localhost", user="root", passwd="", baseprueba3)
+    cursor = base.cursor()
+    cursor.execute('UPDATE producto SET producto = ? where id = ?')
+    base.commit()
+    base.close()
+    print(cursor.rowcount, "Cantidad de registros afectados")

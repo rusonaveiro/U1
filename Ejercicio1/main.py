@@ -36,6 +36,8 @@ Ent2 = entradas(des, 15, 2, 1)
 # crea db, tabla y registros
 boton_alta = Button(root, text="Alta", command=lambda: val_reg(tit, des, Ent1, Ent2, tree))
 boton_borrar = ttk.Button(root, text="Borrar", command=lambda: borrar_reg(tree))
+boton_editar = ttk.Button(root, text="Actualizar", command=lambda: editar_reg(tree))
+
 
 ####################################################################################
 
@@ -67,7 +69,8 @@ titulo.grid(row=1, column=0, sticky='w')
 descripcion.grid(row=2, column=0, sticky='w')
 registros.grid(row=3, column=0, columnspan=4, padx=1, pady=1, sticky=W+E)
 boton_alta.grid(row=20, column=0)
-boton_borrar.grid(row=20, column=2)
+boton_borrar.grid(row=20, column=3)
+boton_editar.grid(row=20, column=2)
 tree.grid(row=10, column=0, columnspan=4)
 
 ####################################################################################
