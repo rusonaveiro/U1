@@ -36,8 +36,8 @@ def val_reg(tit, des, Ent1, Ent2, tree):
         ingresos = cursor.fetchall()
         print(ingresos)
 
-        records = tree.get_children()
-        for element in records:
+        x = tree.get_children()
+        for element in x:
             tree.delete(element)
 
         global id
@@ -50,21 +50,20 @@ def val_reg(tit, des, Ent1, Ent2, tree):
 
 
 
-
 def borrar_reg(tree):
     global id
-    id = tree.selection()[0]  # get selected item
-    values = tuple(tree.item(id)["text"])
-    print(values)
+    id = tree.focus()
+    print(tree.item(id)["text"])  # Imprime el numero de entrada
+    a = tree.item(id)["text"]   # Le asigno la entrada completa a variable a
+    print(type(a))
+    tree.delete(id)  # borro la entrada del tree pero no de la db
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     base = sqlite3.connect('baseprueba3.db')
     # base = mysql.connector.connect(host="localhost", user="root", passwd="", baseprueba3)
     cursor = base.cursor()
-    sql = "DELETE FROM producto WHERE titulo=? AND descripcion=?"
-    # sql = "DELETE FROM producto WHERE titulo = %s"
-    cursor.execute(sql, (*values))
+    cursor.execute("DELETE FROM producto WHERE ID=" + a)
     base.commit()
     base.close()
-    tree.delete(id)
     print(cursor.rowcount, "registro ", id, " borrado")
 
 
@@ -72,8 +71,8 @@ def borrar_reg(tree):
 def editar_reg(tree):
     global id
     x = tree.get_children()
-    for item in x:  # Cambiando los children del root item
-        tree.item(item, text=str(id[0]), values=(id[1], id[2]))
+    for element in x:  # Cambiando los children del root item
+        tree.item(element, text=str(id[0]), values=(id[1], id[2]))
 
     base = sqlite3.connect('baseprueba3.db')
     # base = mysql.connector.connect(host="localhost", user="root", passwd="", baseprueba3)
