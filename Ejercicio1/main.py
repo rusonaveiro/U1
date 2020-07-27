@@ -69,8 +69,8 @@ titulo.grid(row=1, column=0, sticky='w')
 descripcion.grid(row=2, column=0, sticky='w')
 registros.grid(row=3, column=0, columnspan=4, padx=1, pady=1, sticky=W+E)
 boton_alta.grid(row=20, column=0)
-boton_borrar.grid(row=20, column=3)
-boton_editar.grid(row=20, column=2)
+boton_borrar.grid(row=20, column=2)
+boton_editar.grid(row=20, column=1)
 tree.grid(row=10, column=0, columnspan=4)
 
 ####################################################################################

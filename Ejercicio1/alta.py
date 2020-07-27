@@ -1,6 +1,4 @@
-# Juan para revisar el ejercicio con si no usas sqlite quita el # de mysql y ponsela a sqlite asi puedes ver el codigo
 
-# import mysql.connector
 import sqlite3
 import re
 
@@ -17,16 +15,12 @@ def val_reg(tit, des, Ent1, Ent2, tree):
         base = sqlite3.connect('baseprueba3.db')
         print("Base creada")
         cursor = base.cursor()
-        # base = mysql.connector.connect(host="localhost", user="root", passwd="")
-        # cursor = base.cursor()
-        # cursor.execute("CREATE DATABASE baseprueba3")
         try:
             cursor.execute("CREATE TABLE producto(id integer PRIMARY KEY NOT NULL, titulo VARCHAR NOT NULL, descripcion VARCHAR NOT NULL)")
         except:
             pass
 
         sql = "INSERT INTO producto (titulo, descripcion) VALUES (?, ?)"
-        # sql = "INSERT INTO producto (titulo, descripcion) VALUES (%s, %s)"
         datos = (tit.get(), des.get())
         cursor.execute(sql, datos)
         base.commit()
@@ -59,7 +53,6 @@ def borrar_reg(tree):
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     base = sqlite3.connect('baseprueba3.db')
-    # base = mysql.connector.connect(host="localhost", user="root", passwd="", baseprueba3)
     cursor = base.cursor()
     cursor.execute("DELETE FROM producto WHERE ID=" + a)
     base.commit()
@@ -68,18 +61,20 @@ def borrar_reg(tree):
 
 
 
-""" NO FUNCIONA 
+# NO FUNCIONA
 
 def editar_reg(tree):
+    global id
     id = tree.focus()
+    entrada = id.get('values')
+    entexto = str(entrada)
     x = tree.get_children()
     for element in x:  # Cambiando los children del root item
         tree.delete(element)
 
     base = sqlite3.connect('baseprueba3.db')
-    # base = mysql.connector.connect(host="localhost", user="root", passwd="", baseprueba3)
     cursor = base.cursor()
-    # sql = 'UPDATE producto SET titulo=?, descripcion=? WHERE id = ' + id
+    sql = 'UPDATE producto SET titulo=?, descripcion=? WHERE id = ' + entexto
     datos = (tit.get(), des.get())
     cursor.execute(sql, datos)
     base.commit()
@@ -87,13 +82,11 @@ def editar_reg(tree):
     sql_id = "SELECT * FROM producto"
     cursor.execute(sql_id)
     ingresos = cursor.fetchall()
-    global id
-        for i in ingresos:
-            print(i)
-            id = i
-            tree.insert("", "end", text=str(id[0]), values=(id[1], id[2]))
+    for i in ingresos:
+        print(i)
+        id = i
+        tree.insert("", "end", text=str(id[0]), values=(id[1], id[2]))
 
     print(cursor.rowcount, "Cantidad de registros afectados")
     Ent1.delete(0, "end")
     Ent2.delete(0, "end")
-"""
