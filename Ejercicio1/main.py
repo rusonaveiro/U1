@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from Ejercicio1.alta import *
+from alta import *
 
 root = Tk()
 root.title("Tarea Poo")
@@ -36,7 +36,7 @@ Ent2 = entradas(des, 15, 2, 1)
 # crea db, tabla y registros
 boton_alta = Button(root, text="Alta", command=lambda: val_reg(tit, des, Ent1, Ent2, tree))
 boton_borrar = ttk.Button(root, text="Borrar", command=lambda: borrar_reg(tree))
-boton_editar = ttk.Button(root, text="Actualizar", command=lambda: editar_reg(tree))
+boton_editar = ttk.Button(root, text="Actualizar", command=lambda: editar_reg(tit, des, Ent1, Ent2, tree))
 
 
 ####################################################################################

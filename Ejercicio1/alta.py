@@ -61,20 +61,15 @@ def borrar_reg(tree):
 
 
 
-# NO FUNCIONA
-
-def editar_reg(tree):
+def editar_reg(tit, des, Ent1, Ent2, tree):
     global id
     id = tree.focus()
-    entrada = id.get('values')
-    entexto = str(entrada)
-    x = tree.get_children()
-    for element in x:  # Cambiando los children del root item
-        tree.delete(element)
+    a = tree.item(id)["text"]  # Le asigno ese registro completo a la variable a
+    tree.delete(id)  # borro el registro del tree pero no de la db
 
     base = sqlite3.connect('baseprueba3.db')
     cursor = base.cursor()
-    sql = 'UPDATE producto SET titulo=?, descripcion=? WHERE id = ' + entexto
+    sql = 'UPDATE producto SET titulo=?, descripcion=? WHERE id = ' + a
     datos = (tit.get(), des.get())
     cursor.execute(sql, datos)
     base.commit()
